@@ -1,4 +1,4 @@
-import { auth, googleAuthProvider } from "../lib/firebase";
+import { auth, firestore, googleAuthProvider } from "../lib/firebase";
 import { useContext, useState, useEffect, useCallback } from "react";
 import { UserContext } from "../lib/context";
 import debounce from "lodash.debounce";
@@ -49,6 +49,19 @@ function UsernameForm() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    const userDoc = firestore.doc(`users/${user.uid}`);
+    const usernameDoc = firestore.doc(`usernames/${formValue}`);
+
+    const batch = firestore.batch();
+    batch.set(userDoc, {
+      username: formValue,
+      photoURL: user.photoURL,
+      displayName: user.displayName,
+    });
+    batch.set(usernameDoc, { uid: user.uid });
+
+    await batch.commit();
   };
 
   useEffect(() => {
@@ -100,6 +113,11 @@ function UsernameForm() {
             value={formValue}
             onChange={onChange}
           />
+          <UsernameMessage
+            username={formValue}
+            isValid={isValid}
+            loading={loading}
+          />
           <button type="submit" className="btn-green" disabled={!isValid}>
             Choose
           </button>
@@ -116,4 +134,16 @@ function UsernameForm() {
       </section>
     )
   );
+}
+
+function UsernameMessage({ username, isValid, loading }) {
+  if (loading) {
+    return <p>Checking...</p>;
+  } else if (isValid) {
+    return <p className="text-success">{username} is available!</p>;
+  } else if (username && !isValid) {
+    return <p className="text-danger">That username is taken!</p>;
+  } else {
+    return <p></p>;
+  }
 }
