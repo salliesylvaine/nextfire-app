@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 export default function Home() {
   return (
     <div>
-      <Loader show />
+      {/* <Loader show /> */}
       <button onClick={() => toast.success("hello toast")}>Toast Me</button>
     </div>
   );
