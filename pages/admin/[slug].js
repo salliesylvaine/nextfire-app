@@ -110,7 +110,11 @@ function PostForm({ defaultValues, postRef, preview }) {
           <label>Published</label>
         </fieldset>
 
-        <button type="submit" className="btn-green">
+        <button
+          type="submit"
+          className="btn-green"
+          disabled={!isDirty || !isValid}
+        >
           Save Changes
         </button>
       </div>
