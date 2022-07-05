@@ -11,6 +11,8 @@ import toast from "react-hot-toast";
 import styles from "../../styles/Admin.module.css";
 import AuthCheck from "../../components/AuthCheck";
 import { firestore, auth } from "../../lib/firebase";
+import ImageUploader from "../../components/ImageUploader";
+
 //importing directly from Firestore, issues when trying to export it from lib/firebase
 import { serverTimestamp } from "firebase/firestore";
 
@@ -95,7 +97,6 @@ function PostForm({ defaultValues, postRef, preview }) {
     toast.success("Post updated successfully!");
   };
 
-  console.log(defaultValues);
   return (
     <form onSubmit={handleSubmit(updatePost)}>
       {preview && (
@@ -104,6 +105,8 @@ function PostForm({ defaultValues, postRef, preview }) {
         </div>
       )}
       <div className={preview ? styles.hidden : styles.controls}>
+        <ImageUploader />
+
         <textarea
           {...register("content", {
             maxLength: { value: 20000, message: "content is too long" },
