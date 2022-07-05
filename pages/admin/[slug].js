@@ -70,10 +70,19 @@ function PostManager() {
 
 //defaultValues = data from firestore document
 function PostForm({ defaultValues, postRef, preview }) {
-  const { register, handleSubmit, reset, watch } = useForm({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    formState,
+    formState: { errors },
+  } = useForm({
     defaultValues,
     mode: "onChange",
   });
+
+  const { isValid, isDirty } = formState;
 
   const updatePost = async ({ content, published }) => {
     await postRef.update({ content, published, updatedAt: serverTimestamp() });
