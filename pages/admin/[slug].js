@@ -14,6 +14,9 @@ import { firestore, auth } from "../../lib/firebase";
 //importing directly from Firestore, issues when trying to export it from lib/firebase
 import { serverTimestamp } from "firebase/firestore";
 
+//importing ErrorMessage from react-hook-form to comply with v.7
+import { ErrorMessage } from "@hookform/error-message";
+
 export default function AdminPostsEdit(props) {
   return (
     // <main>
@@ -92,6 +95,7 @@ function PostForm({ defaultValues, postRef, preview }) {
     toast.success("Post updated successfully!");
   };
 
+  console.log(defaultValues);
   return (
     <form onSubmit={handleSubmit(updatePost)}>
       {preview && (
@@ -100,7 +104,20 @@ function PostForm({ defaultValues, postRef, preview }) {
         </div>
       )}
       <div className={preview ? styles.hidden : styles.controls}>
-        <textarea {...register("content")}></textarea>
+        <textarea
+          {...register("content", {
+            maxLength: { value: 20000, message: "content is too long" },
+            minLength: { value: 10, message: "content is too short" },
+            required: { value: true, message: "content is required" },
+          })}
+        ></textarea>
+
+        <ErrorMessage
+          className="text-danger"
+          errors={errors}
+          name="content"
+          as="p"
+        />
         <fieldset>
           <input
             className={styles.checkbox}
