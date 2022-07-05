@@ -11,7 +11,6 @@ import toast from "react-hot-toast";
 import styles from "../../styles/Admin.module.css";
 import AuthCheck from "../../components/AuthCheck";
 import { firestore, auth } from "../../lib/firebase";
-
 //importing directly from Firestore, issues when trying to export it from lib/firebase
 import { serverTimestamp } from "firebase/firestore";
 
@@ -71,19 +70,10 @@ function PostManager() {
 
 //defaultValues = data from firestore document
 function PostForm({ defaultValues, postRef, preview }) {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    watch,
-    formState,
-    formState: { errors },
-  } = useForm({
+  const { register, handleSubmit, reset, watch } = useForm({
     defaultValues,
     mode: "onChange",
   });
-
-  const { isValid, isDirty } = formState;
 
   const updatePost = async ({ content, published }) => {
     await postRef.update({ content, published, updatedAt: serverTimestamp() });
@@ -101,17 +91,7 @@ function PostForm({ defaultValues, postRef, preview }) {
         </div>
       )}
       <div className={preview ? styles.hidden : styles.controls}>
-        <textarea
-          {...register(
-            "content",
-            { maxLength: { value: 20000, message: "content is too long" } },
-            { minLength: { value: 10, message: "content is too short" } },
-            { required: { value: true, message: "content is required" } }
-          )}
-        ></textarea>
-        {errors.content && (
-          <p className="text-danger">{errors.content.message}</p>
-        )}
+        <textarea {...register("content")}></textarea>
         <fieldset>
           <input
             className={styles.checkbox}
@@ -121,11 +101,7 @@ function PostForm({ defaultValues, postRef, preview }) {
           <label>Published</label>
         </fieldset>
 
-        <button
-          type="submit"
-          className="btn-green"
-          disabled={!isDirty || !isValid}
-        >
+        <button type="submit" className="btn-green">
           Save Changes
         </button>
       </div>
