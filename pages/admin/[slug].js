@@ -1,3 +1,8 @@
+//by putting the file name in [], it makes the route to the file dynamic
+//ex: [slug].js or [username]
+//slug is the unique identifying part of a web address,
+//typically at the end of a url
+
 import MetaTags from "../../components/Metatags";
 import { useState } from "react";
 import { useRouter } from "next/router";
