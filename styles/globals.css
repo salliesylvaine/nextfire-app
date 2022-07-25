@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap");
 
+/* The globals.css file is where you can define CSS styles 
+that will be applied throughout the entire application. 
+But, you might also be more likely to run into name collisions and style conflicts */
+
 :root {
   --color-bg: #eef0f1;
   --color-text: #08090a;

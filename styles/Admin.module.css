@@ -1,3 +1,7 @@
+/* Module files can be used for specific component styling. 
+When the HTML is generated, the CSS class names will be randomly generated 
+so they don't conflict with classes used in other parts of the application. */
+
 .container {
   min-height: 100vh;
   display: flex;
