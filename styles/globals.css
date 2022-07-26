@@ -275,3 +275,10 @@ input[type="file"] {
 .hidden {
   display: none;
 }
+
+/* Heart Button */
+#heart {
+  height: 1rem;
+  width: 1rem;
+  display: flex;
+}

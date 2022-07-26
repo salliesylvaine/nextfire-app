@@ -31,8 +31,13 @@ export default function HeartButton({ postRef }) {
   };
 
   return heartDoc?.exists() ? (
-    <button onClick={removeHeart}>💔 UnHeart</button>
+    <button onClick={removeHeart}>
+      {" "}
+      <img id="heart" src="/brokenheart.png" /> UnHeart
+    </button>
   ) : (
-    <button onClick={addHeart}>💗 Heart</button>
+    <button onClick={addHeart}>
+      <img id="heart" src="/pixelheart.png" /> Heart
+    </button>
   );
 }
