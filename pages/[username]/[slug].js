@@ -57,7 +57,10 @@ export default function Post(props) {
 
       <aside className="card">
         <p>
-          <strong>{post.heartCount || 0} 🤍</strong>
+          <strong>
+            {post.heartCount || 0}{" "}
+            <img id="heart-count" src="/pixelheart.png" />
+          </strong>
         </p>
 
         <AuthCheck
