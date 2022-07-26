@@ -5,6 +5,9 @@ import debounce from "lodash.debounce";
 import SignOutButton from "../components/SignOutButton";
 
 export default function Enter(props) {
+  // this is where we access the user data
+  // fyi - any components that depend on these values
+  // will re-render anytime the user or username changes
   const { user, username } = useContext(UserContext);
 
   // 1. user signed out <SignInButton/>

@@ -7,6 +7,10 @@ import { useUserData } from "../lib/hooks";
 function MyApp({ Component, pageProps }) {
   const userData = useUserData();
 
+  // to make sure the username/user data is available to all
+  // components, we can add it to the component tree using
+  // <UserContext.Provider/> with the other components inside it.
+
   return (
     <UserContext.Provider value={userData}>
       <Navbar />

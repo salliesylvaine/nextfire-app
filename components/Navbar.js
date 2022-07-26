@@ -5,6 +5,9 @@ import SignOutButton from "../components/SignOutButton";
 
 //Top Navbar
 export default function Navbar() {
+  // this is where we access the user data
+  // fyi - any components that depend on these values
+  // will re-render anytime the user or username changes
   const { user, username } = useContext(UserContext);
 
   return (
