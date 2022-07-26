@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { UserContext } from "../lib/context";
 import SignOutButton from "../components/SignOutButton";
 
+//Top Navbar
 export default function Navbar() {
   const { user, username } = useContext(UserContext);
 
