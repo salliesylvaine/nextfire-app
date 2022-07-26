@@ -13,7 +13,8 @@ export default function Enter(props) {
         !username ? (
           <UsernameForm />
         ) : (
-          <SignOutButton />
+          // <SignOutButton />
+          <p>You&apos;re signed in and ready to scroll!</p>
         )
       ) : (
         <SignInButton />
