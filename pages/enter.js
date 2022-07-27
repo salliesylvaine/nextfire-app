@@ -53,9 +53,11 @@ function UsernameForm() {
   const onSubmit = async (e) => {
     e.preventDefault();
 
+    // Create refs for both documents
     const userDoc = firestore.doc(`users/${user.uid}`);
     const usernameDoc = firestore.doc(`usernames/${formValue}`);
 
+    // Commit both docs together as a batch write
     const batch = firestore.batch();
     batch.set(userDoc, {
       username: formValue,
@@ -92,6 +94,14 @@ function UsernameForm() {
 
   //Hit the database for username match after each debounced change
   //useCallback is required for debounce to work
+  //debounce is used to make sure the code is only triggered once
+  //per user input. layman's terms, it will wait for the user to
+  //stop typing for 500ms before running the function.
+
+  //we have to wrap it in useCallback bc React creates a new function
+  //object every time it re-renders which will not be debounced.
+  //useCallback allows the function to be memoized so it can easily be
+  //debounced between state changes.
   const checkUsername = useCallback(
     debounce(async (username) => {
       if (username.length >= 3) {
