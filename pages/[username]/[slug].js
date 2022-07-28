@@ -87,6 +87,9 @@ export default function Post(props) {
           }
         >
           <HeartButton postRef={postRef} />
+          <Link href={`/admin/${post.slug}`}>
+            <button className="btn-blue">Edit Post</button>
+          </Link>
         </AuthCheck>
       </aside>
     </main>
