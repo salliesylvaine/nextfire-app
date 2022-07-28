@@ -6,7 +6,11 @@ import AuthCheck from "../../components/AuthCheck";
 import HeartButton from "../../components/HeartButton";
 import Link from "next/link";
 
+//implement incremental static regeneration
+//(pre-renders the page)
 export async function getStaticProps({ params }) {
+  //tells next to fetch data on the server at buildtime in order
+  //to prerendering the page
   const { username, slug } = params;
   const userDoc = await getUserWithUsername(username);
 
@@ -22,10 +26,13 @@ export async function getStaticProps({ params }) {
 
   return {
     props: { post, path },
+    //revalidate tells next to regenerate this page on the server
+    //when new requests come in, but only in a certain time interval.
     revalidate: 5000,
   };
 }
 
+//determines which actual pages to render
 export async function getStaticPaths() {
   const snapshot = await firestore.collectionGroup("posts").get();
 
@@ -40,6 +47,10 @@ export async function getStaticPaths() {
   return {
     paths,
     fallback: "blocking",
+    //by adding fallback: "blocking", when a user navigates to a
+    //page that hasn't been rendered yet, it tells next to fallback
+    //to server-side rendering. once it renders the page, it can be
+    //cached on the CDN like all the other pages.
   };
 }
 
