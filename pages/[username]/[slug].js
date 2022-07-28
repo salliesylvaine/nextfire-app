@@ -54,10 +54,15 @@ export async function getStaticPaths() {
   };
 }
 
+//hydrates from server rendered content to realtime data
 export default function Post(props) {
+  //references the database via path to server rendered content
   const postRef = firestore.doc(props.path);
+  //gets feed of data in realtime
   const [realtimePost] = useDocumentData(postRef);
 
+  //defaults to realtime data, otherwise falls back to pre-rendered
+  //data on the server.
   const post = realtimePost || props.post;
 
   return (
