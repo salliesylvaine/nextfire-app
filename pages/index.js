@@ -8,12 +8,16 @@ import { useState } from "react";
 const LIMIT = 1;
 
 export async function getServerSideProps(context) {
+  //queries the first batch of posts with collectionGroup query
+  //(grabs any subcollection no matter where its nested in the tree
+  //in firestore that has a name of posts)
   const postsQuery = firestore
     .collectionGroup("posts")
     .where("published", "==", true)
     .orderBy("createdAt", "desc")
     .limit(LIMIT);
 
+  //fetch data
   const posts = (await postsQuery.get()).docs.map(postToJSON);
 
   return {
@@ -22,6 +26,9 @@ export async function getServerSideProps(context) {
 }
 
 export default function Home(props) {
+  //set props as state on component since we might want to
+  //fetch additional posts in the future. uses props rendered
+  //on server as initial value.
   const [posts, setPosts] = useState(props.posts);
   const [loading, setLoading] = useState(false);
 
