@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+//routes to 404 page in case a username doesn't exist
 export default function Custom404() {
   return (
     <main>
