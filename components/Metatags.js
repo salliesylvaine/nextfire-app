@@ -1,5 +1,9 @@
 import Head from "next/head";
 
+//bots look for metatags in the head of the document that gives
+//description, images, and anything else it can use to understand
+//the content of the page. The metadata will ultimately be displayed
+//in search engines or posting a link.
 export default function MetaTags({
   title = "Nextfire App Metatag Test",
   description = "This is a test",
