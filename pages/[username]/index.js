@@ -17,6 +17,7 @@ export async function getServerSideProps({ query }) {
   let user = null;
   let posts = null;
 
+  //get all posts authored by a specific user
   if (userDoc) {
     user = userDoc.data();
     const postsQuery = userDoc.ref
