@@ -31,7 +31,6 @@ export default function ImageUploader() {
       setProgress(pct);
 
       //Get downloadURL AFTER task resolves (Note: this is not a native Promise)
-
       task
         .then((d) => ref.getDownloadURL())
         .then((url) => {
@@ -47,6 +46,9 @@ export default function ImageUploader() {
       {uploading && <h3>{progress}%</h3>}
       {!uploading && (
         <>
+          {/* html file inputs can be difficult to style, 
+        therefore putting the input inside a label will 
+        automatically focus the label to the input when clicked */}
           <label className="btn">
             📸 Upload Img
             <input

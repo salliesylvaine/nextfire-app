@@ -93,6 +93,7 @@ function PostForm({ defaultValues, postRef, preview }) {
     mode: "onChange",
   });
 
+  //isDirty means the user has interacted with it
   const { isValid, isDirty } = formState;
 
   const updatePost = async ({ content, published }) => {
