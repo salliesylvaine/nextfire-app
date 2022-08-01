@@ -5,6 +5,7 @@ import PostFeed from "../../components/PostFeed";
 import { UserContext } from "../../lib/context";
 import { firestore, auth } from "../../lib/firebase";
 
+//special function that tells firestore to save a timestamp on a document on the server
 //importing directly from Firestore, issues when trying to export it from lib/firebase
 import { serverTimestamp } from "firebase/firestore";
 
@@ -32,6 +33,7 @@ function PostList() {
     .doc(auth.currentUser.uid)
     .collection("posts");
   const query = ref.orderBy("createdAt");
+  //reads collection in real time
   const [querySnapshot] = useCollection(query);
 
   const posts = querySnapshot?.docs.map((doc) => doc.data());
@@ -50,6 +52,7 @@ function CreateNewPost() {
   const [title, setTitle] = useState("");
 
   //Ensure slug is URL safe
+  //kebabCase converts spaces to dashes ( - ) and strips out ?!/ characters
   const slug = encodeURI(kebabCase(title));
 
   //Validate length
@@ -66,8 +69,6 @@ function CreateNewPost() {
       .collection("posts")
       .doc(slug);
 
-    console.log();
-
     const data = {
       title,
       slug,
@@ -80,6 +81,7 @@ function CreateNewPost() {
       heartCount: 0,
     };
 
+    //commit document to firestore
     await ref.set(data);
 
     toast.success("Post created!");
