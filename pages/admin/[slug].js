@@ -80,6 +80,7 @@ function PostManager() {
 
 //defaultValues = data from firestore document
 function PostForm({ defaultValues, postRef, preview }) {
+  //connects html form to react
   const {
     register,
     handleSubmit,
