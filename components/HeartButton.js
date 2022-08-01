@@ -12,6 +12,8 @@ export default function HeartButton({ postRef }) {
   //Create a user-to-post relationship
   const addHeart = async () => {
     const uid = auth.currentUser.uid;
+    //lets us update 2 documents at the same time
+    //since they need to succeed or fail together
     const batch = firestore.batch();
 
     batch.update(postRef, { heartCount: increment(1) });
