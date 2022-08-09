@@ -32,8 +32,8 @@ function PostItem({ post, admin = false }) {
           {wordCount} words. {minutesToRead} min read
         </span>
         <span className="push-left">
-          {" "}
-          <img id="heart" src="/pixelheart.png" /> {post.heartCount || 0} Hearts
+          <img className="btn-heart" src="/pixelheart.png" />{" "}
+          {post.heartCount || 0} Hearts
         </span>
       </footer>
     </div>
