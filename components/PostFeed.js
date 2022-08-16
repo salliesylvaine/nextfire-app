@@ -11,6 +11,7 @@ export default function PostFeed({ posts, admin }) {
 function PostItem({ post, admin = false }) {
   //Naive method to calc word count and read time
   const wordCount = post?.content.trim().split(/\s+/g).length;
+  //assuming user can read 100 words per minute
   const minutesToRead = (wordCount / 100 + 1).toFixed(0);
 
   return (
