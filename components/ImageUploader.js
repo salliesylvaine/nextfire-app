@@ -50,7 +50,7 @@ export default function ImageUploader() {
         therefore putting the input inside a label will 
         automatically focus the label to the input when clicked */}
           <label className="btn">
-            📸 Upload Img
+            📸 Upload Image
             <input
               type="file"
               onChange={uploadFile}

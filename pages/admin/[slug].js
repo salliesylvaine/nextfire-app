@@ -55,7 +55,12 @@ function PostManager() {
         <>
           <section>
             <h1>{post.title}</h1>
-            <p>ID: {post.slug}</p>
+            <p>
+              To upload an image, click the button below and load the image.
+              Once complete, you will get a link that you can copy and paste
+              anywhere in your post. Note: currently accepts .png, .jpeg, and
+              .gif
+            </p>
 
             <PostForm
               postRef={postRef}
@@ -96,12 +101,17 @@ function PostForm({ defaultValues, postRef, preview }) {
   //isDirty means the user has interacted with it
   const { isValid, isDirty } = formState;
 
+  const [post] = useDocumentData(postRef);
+  const router = useRouter();
+
   const updatePost = async ({ content, published }) => {
     await postRef.update({ content, published, updatedAt: serverTimestamp() });
 
     reset({ content, published });
 
     toast.success("Post updated successfully!");
+
+    router.push(`/${post.username}/${post.slug}`);
   };
 
   return (

@@ -20,8 +20,8 @@ export default function AdminPostsPage(props) {
   return (
     <main>
       <AuthCheck>
-        <PostList />
         <CreateNewPost />
+        <PostList />
       </AuthCheck>
     </main>
   );
@@ -95,7 +95,7 @@ function CreateNewPost() {
       <input
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        placeholder="My Awesome Article!"
+        placeholder="New Article Title Here"
         className={styles.input}
       />
 
