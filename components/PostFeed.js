@@ -21,6 +21,15 @@ function PostItem({ post, admin = false }) {
       return "hearts";
     }
   };
+
+  const wordText = () => {
+    if (wordCount === 1) {
+      return "word";
+    } else {
+      return "words";
+    }
+  };
+
   return (
     <div className="card">
       <Link href={`/${post.username}`}>
@@ -37,7 +46,7 @@ function PostItem({ post, admin = false }) {
 
       <footer>
         <span>
-          {wordCount} words. {minutesToRead} min read
+          {wordCount} {wordText()}. {minutesToRead} min read
         </span>
         <span className="push-left">
           <img className="btn-heart" src="/pixelheart.png" />{" "}
