@@ -14,6 +14,13 @@ function PostItem({ post, admin = false }) {
   //assuming user can read 100 words per minute
   const minutesToRead = (wordCount / 100 + 1).toFixed(0);
 
+  const heartText = (post) => {
+    if (post.heartCount === 1) {
+      return "heart";
+    } else {
+      return "hearts";
+    }
+  };
   return (
     <div className="card">
       <Link href={`/${post.username}`}>
@@ -34,7 +41,7 @@ function PostItem({ post, admin = false }) {
         </span>
         <span className="push-left">
           <img className="btn-heart" src="/pixelheart.png" />{" "}
-          {post.heartCount || 0} Hearts
+          {post.heartCount || 0} {heartText(post)}
         </span>
       </footer>
     </div>
